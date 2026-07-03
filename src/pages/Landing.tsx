@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import screenImg from '../assets/screen.png';
+import screenImg from '../assets/raccoon.png';
 import Navbar from '../components/Navbar';
-//import AuthModal from '../components/AuthModal';
+import AuthModal from '../components/AuthModal';
 
 export default function Landing() {
   const navigate = useNavigate();
-  //const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   return (
     <div className="bg-background-4 bg-sketch-dots text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden selection:bg-secondary-container selection:text-on-background">
       <Navbar />
@@ -50,7 +50,7 @@ export default function Landing() {
         <div className="w-full flex flex-col sm:flex-row gap-[1.5vw] mt-[1vw] z-10 justify-center pb-[4vh] max-w-[45vw] min-w-[280px] mx-auto">
           {/* Primary CTA */}
           <button 
-            //onClick={() => setIsAuthModalOpen(true)} 
+            onClick={() => setIsAuthModalOpen(true)} 
             className="flex-1 flex items-center justify-center gap-[0.5vw] bg-white text-on-background border-[clamp(2px,0.25vw,4px)] border-on-background rounded-[clamp(8px,1vw,16px)] px-[2vw] py-[1.2vw] font-bold text-[clamp(0.95rem,1.3vw,1.8rem)] shadow-[clamp(4px,0.5vw,10px)_clamp(4px,0.5vw,10px)_0px_0px_#111111] hover:-translate-y-1 hover:shadow-[clamp(6px,0.75vw,14px)_clamp(6px,0.75vw,14px)_0px_0px_#111111] transition-all active:translate-y-2 active:translate-x-2 active:shadow-none cursor-pointer"
           >
             <span className="material-symbols-outlined text-[clamp(1.2rem,1.6vw,2.2rem)]">login</span>
@@ -65,12 +65,12 @@ export default function Landing() {
         </div>
       </main>
       
-      {/* {isAuthModalOpen && (
+      {isAuthModalOpen && (
         <AuthModal 
           onClose={() => setIsAuthModalOpen(false)} 
           onSuccess={() => navigate('/home')}
         />
-      )} */}
+      )}
     </div>
   );
 }
