@@ -31,3 +31,16 @@ export interface BackendSketch {
   };
   user_attempts?: BackendAttempt[];
 }
+
+export interface SketchDetail {
+  id_sketch: number;
+  path: string;
+  createdAt: string;
+  User: {
+    username: string;
+  };
+  Word?: {
+    text: string;
+  };
+  user_attempts?: BackendAttempt[];
+}

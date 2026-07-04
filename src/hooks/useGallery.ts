@@ -34,6 +34,12 @@ interface UseGalleryReturn {
   // Filters
   activeFilter: GalleryFilter;
   setActiveFilter: (filter: GalleryFilter) => void;
+  // Preview Modal
+  selectedPreviewSketchId: number | null;
+  selectedPreviewAuthor: string;
+  isPreviewModalOpen: boolean;
+  handleOpenPreviewModal: (id: number, author?: string) => void;
+  handleClosePreviewModal: () => void;
   // Actions
   refetchSketches: () => void;
 }
@@ -46,6 +52,11 @@ export function useGallery(): UseGalleryReturn {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [activeFilter, setActiveFilter] = useState<GalleryFilter>('all');
+
+  // Preview Modal state
+  const [selectedPreviewSketchId, setSelectedPreviewSketchId] = useState<number | null>(null);
+  const [selectedPreviewAuthor, setSelectedPreviewAuthor] = useState<string>('');
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
 
   const fetchSketches = useCallback(() => {
     sketchService.getSketches()
@@ -105,6 +116,17 @@ export function useGallery(): UseGalleryReturn {
     return true;
   });
 
+  const handleOpenPreviewModal = (id: number, author?: string) => {
+    setSelectedPreviewSketchId(id);
+    setSelectedPreviewAuthor(author || '');
+    setIsPreviewModalOpen(true);
+  };
+
+  const handleClosePreviewModal = () => {
+    setIsPreviewModalOpen(false);
+    setSelectedPreviewSketchId(null);
+  };
+
   return {
     sketches,
     displaySketches,
@@ -113,6 +135,11 @@ export function useGallery(): UseGalleryReturn {
     hasError,
     activeFilter,
     setActiveFilter,
+    selectedPreviewSketchId,
+    selectedPreviewAuthor,
+    isPreviewModalOpen,
+    handleOpenPreviewModal,
+    handleClosePreviewModal,
     refetchSketches: fetchSketches,
   };
 }

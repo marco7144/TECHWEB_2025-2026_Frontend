@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useGallery } from '../hooks/useGallery';
 import SketchPreview from '../components/SketchPreview';
+import PreviewModal from '../components/PreviewModal';
 
 export default function Home() {
   const {
@@ -9,7 +10,12 @@ export default function Home() {
     isLoading,
     hasError,
     activeFilter,
-    setActiveFilter
+    setActiveFilter,
+    selectedPreviewSketchId,
+    selectedPreviewAuthor,
+    isPreviewModalOpen,
+    handleOpenPreviewModal,
+    handleClosePreviewModal
   } = useGallery();
 
   return (
@@ -89,9 +95,13 @@ export default function Home() {
               className={`sketch-card ${sketch.bgClass} border-4 border-on-background rounded-xl p-4 flex flex-col gap-2 hard-shadow relative`}
             >
               <div 
-                className="w-full aspect-4/3 bg-white border-2 border-on-background rounded-lg overflow-hidden relative group flex items-center justify-center"
+                onClick={() => handleOpenPreviewModal(sketch.id, sketch.author)}
+                className="w-full aspect-4/3 bg-white border-2 border-on-background rounded-lg overflow-hidden relative group cursor-pointer flex items-center justify-center"
               >
                 <SketchPreview pathJson={sketch.pathJson} />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span className="material-symbols-outlined text-white text-[48px] drop-shadow-md">zoom_in</span>
+                </div>
               </div>
               <div className="flex justify-between items-end mt-1">
                 <div>
@@ -102,14 +112,25 @@ export default function Home() {
                   <div className="text-[12px] opacity-80">{sketch.date}</div>
                 </div>
                 <button 
-                  className="bg-secondary-container text-on-secondary-fixed border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow text-[12px] whitespace-nowrap"
+                  onClick={() => handleOpenPreviewModal(sketch.id, sketch.author)}
+                  className="bg-secondary-container text-on-secondary-fixed border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active text-[12px] cursor-pointer whitespace-nowrap"
                 >
-                  Dettagli
+                  Vedi Opera
                 </button>
               </div>
             </div>
           ))}
         </div>
+      )}
+
+      {isPreviewModalOpen && selectedPreviewSketchId !== null && (
+        <PreviewModal 
+          sketchId={selectedPreviewSketchId}
+          isReal={true}
+          imageUrl=""
+          authorName={selectedPreviewAuthor}
+          onClose={handleClosePreviewModal}
+        />
       )}
     </>
   );
