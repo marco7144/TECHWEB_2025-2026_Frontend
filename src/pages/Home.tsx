@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useGallery } from '../hooks/useGallery';
+import SketchPreview from '../components/SketchPreview';
 
 export default function Home() {
   const {
@@ -90,7 +91,7 @@ export default function Home() {
               <div 
                 className="w-full aspect-4/3 bg-white border-2 border-on-background rounded-lg overflow-hidden relative group flex items-center justify-center"
               >
-                <div className="text-sm font-bold text-on-surface-variant italic">[Disegno]</div>
+                <SketchPreview pathJson={sketch.pathJson} />
               </div>
               <div className="flex justify-between items-end mt-1">
                 <div>
