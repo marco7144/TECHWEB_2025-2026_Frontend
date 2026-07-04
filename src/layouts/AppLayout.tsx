@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from '../components/AuthModal';
+import LogoutModal from '../components/LogoutModal';
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -12,13 +13,15 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const navigate = useNavigate();
   const { isGuest, username, logout } = useAuth();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
   const handleLogout = () => {
     logout();
     navigate('/');
   };
 
   const triggerLogoutConfirm = () => {
-    handleLogout();
+    setIsLogoutModalOpen(true);
   };
 
   return (
@@ -145,6 +148,16 @@ export default function AppLayout({ children }: AppLayoutProps) {
         />
       )}
 
+      {isLogoutModalOpen && (
+        <LogoutModal 
+          isGuest={isGuest}
+          onClose={() => setIsLogoutModalOpen(false)}
+          onConfirm={() => {
+            setIsLogoutModalOpen(false);
+            handleLogout();
+          }}
+        />
+      )}
     </div>
   );
 }
