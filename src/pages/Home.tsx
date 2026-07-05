@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useGallery } from '../hooks/useGallery';
 import SketchPreview from '../components/SketchPreview';
+import GuessModal from '../components/GuessModal';
 import PreviewModal from '../components/PreviewModal';
 
 export default function Home() {
@@ -11,6 +12,11 @@ export default function Home() {
     hasError,
     activeFilter,
     setActiveFilter,
+    selectedSketchId,
+    selectedSketchAuthor,
+    isGuessModalOpen,
+    handleOpenGuessModal,
+    handleCloseGuessModal,
     selectedPreviewSketchId,
     selectedPreviewAuthor,
     isPreviewModalOpen,
@@ -111,16 +117,35 @@ export default function Home() {
                   </div>
                   <div className="text-[12px] opacity-80">{sketch.date}</div>
                 </div>
-                <button 
-                  onClick={() => handleOpenPreviewModal(sketch.id, sketch.author)}
-                  className="bg-secondary-container text-on-secondary-fixed border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active text-[12px] cursor-pointer whitespace-nowrap"
-                >
-                  Vedi Opera
-                </button>
+                {sketch.author === selectedPreviewAuthor ? (
+                  <button 
+                    onClick={() => handleOpenPreviewModal(sketch.id, sketch.author)}
+                    className="bg-secondary-container text-on-secondary-fixed border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active text-[12px] cursor-pointer whitespace-nowrap"
+                  >
+                    Vedi Opera
+                  </button>
+                ) : (
+                  <button 
+                    onClick={() => handleOpenGuessModal(sketch.id, sketch.author)}
+                    className={`${sketch.btnBgClass} border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active text-[12px] cursor-pointer whitespace-nowrap`}
+                  >
+                    Guess Word!
+                  </button>
+                )}
               </div>
             </div>
           ))}
         </div>
+      )}
+
+      {isGuessModalOpen && selectedSketchId !== null && (
+        <GuessModal 
+          sketchId={selectedSketchId}
+          isReal={true}
+          imageUrl=""
+          authorName={selectedSketchAuthor}
+          onClose={handleCloseGuessModal}
+        />
       )}
 
       {isPreviewModalOpen && selectedPreviewSketchId !== null && (

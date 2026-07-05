@@ -44,3 +44,9 @@ export interface SketchDetail {
   };
   user_attempts?: BackendAttempt[];
 }
+
+export interface AttemptResponse {
+  is_correct: boolean;
+  attempts_remaining: number;
+  solution?: string;
+}

@@ -34,6 +34,12 @@ interface UseGalleryReturn {
   // Filters
   activeFilter: GalleryFilter;
   setActiveFilter: (filter: GalleryFilter) => void;
+  // Guess Modal
+  selectedSketchId: number | null;
+  selectedSketchAuthor: string;
+  isGuessModalOpen: boolean;
+  handleOpenGuessModal: (id: number, author?: string) => void;
+  handleCloseGuessModal: () => void;
   // Preview Modal
   selectedPreviewSketchId: number | null;
   selectedPreviewAuthor: string;
@@ -52,6 +58,11 @@ export function useGallery(): UseGalleryReturn {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [activeFilter, setActiveFilter] = useState<GalleryFilter>('all');
+
+  // Guess Modal state
+  const [selectedSketchId, setSelectedSketchId] = useState<number | null>(null);
+  const [selectedSketchAuthor, setSelectedSketchAuthor] = useState<string>('');
+  const [isGuessModalOpen, setIsGuessModalOpen] = useState(false);
 
   // Preview Modal state
   const [selectedPreviewSketchId, setSelectedPreviewSketchId] = useState<number | null>(null);
@@ -116,6 +127,19 @@ export function useGallery(): UseGalleryReturn {
     return true;
   });
 
+  // Modal handlers
+  const handleOpenGuessModal = (id: number, author?: string) => {
+    setSelectedSketchId(id);
+    setSelectedSketchAuthor(author || '');
+    setIsGuessModalOpen(true);
+  };
+
+  const handleCloseGuessModal = () => {
+    setIsGuessModalOpen(false);
+    setSelectedSketchId(null);
+    fetchSketches(); // Ricarica dopo aver chiuso il guess modal
+  };
+
   const handleOpenPreviewModal = (id: number, author?: string) => {
     setSelectedPreviewSketchId(id);
     setSelectedPreviewAuthor(author || '');
@@ -135,6 +159,11 @@ export function useGallery(): UseGalleryReturn {
     hasError,
     activeFilter,
     setActiveFilter,
+    selectedSketchId,
+    selectedSketchAuthor,
+    isGuessModalOpen,
+    handleOpenGuessModal,
+    handleCloseGuessModal,
     selectedPreviewSketchId,
     selectedPreviewAuthor,
     isPreviewModalOpen,
