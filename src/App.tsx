@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import AppLayout from './layouts/AppLayout';
 import Landing from './pages/Landing';
 import Home from './pages/Home';
+import Draw from './pages/Draw';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
 
           {/* Pagine con AppLayout (sidebar, navbar, modali) */}
           <Route path="/home" element={<AppLayout><Home /></AppLayout>} />
+          <Route path="/draw" element={<AppLayout><Draw /></AppLayout>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

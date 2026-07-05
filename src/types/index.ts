@@ -50,3 +50,33 @@ export interface AttemptResponse {
   attempts_remaining: number;
   solution?: string;
 }
+
+// --- Drawing ---
+
+export interface PathObject {
+  type: 'path';
+  path: string;
+  stroke: string;
+  strokeWidth: number;
+  fill: string | null;
+}
+
+export interface PathObjectWithPoints extends PathObject {
+  points: { x: number; y: number }[];
+}
+
+export interface CanvasData {
+  objects: PathObject[];
+  width?: number;
+  height?: number;
+}
+
+export interface WordChoice {
+  id_word: number;
+  text: string;
+}
+
+export interface WordsResponse {
+  words: WordChoice[];
+  token: string;
+}

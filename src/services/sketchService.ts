@@ -1,5 +1,5 @@
 import { apiGet, apiPost } from './api';
-import type { BackendSketch, SketchDetail, AttemptResponse } from '../types';
+import type { BackendSketch, SketchDetail, AttemptResponse, WordsResponse } from '../types';
 
 /**
  * Recupera la lista di tutti gli sketch dalla galleria.
@@ -16,8 +16,26 @@ export async function getSketch(id: number | string): Promise<SketchDetail> {
 }
 
 /**
+ * Crea un nuovo sketch (invia il disegno al backend).
+ */
+export async function createSketch(data: {
+  id_word: number;
+  path: string;
+  words_token: string;
+}): Promise<unknown> {
+  return apiPost('/api/v1/sketches', data);
+}
+
+/**
  * Invia un tentativo di indovinare la parola di uno sketch.
  */
 export async function submitAttempt(sketchId: number | string, guess: string): Promise<AttemptResponse> {
   return apiPost<AttemptResponse>(`/api/v1/sketches/${sketchId}/attempts`, { guess });
+}
+
+/**
+ * Recupera 3 parole casuali per il disegno (richiede autenticazione).
+ */
+export async function getRandomWords(): Promise<WordsResponse> {
+  return apiGet<WordsResponse>('/api/v1/words/random');
 }
