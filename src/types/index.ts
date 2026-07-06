@@ -80,3 +80,20 @@ export interface WordsResponse {
   words: WordChoice[];
   token: string;
 }
+
+// --- Leaderboard ---
+
+export interface PlayerRanking {
+  id_user: number;
+  username: string;
+  score: number;
+}
+
+export interface ArtistRanking {
+  id_user: number;
+  username: string;
+  percentage: number;
+  total_attempts: number;
+  successful_attempts: number;
+  sketches_count: number;
+}
