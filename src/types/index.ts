@@ -81,6 +81,15 @@ export interface WordsResponse {
   token: string;
 }
 
+// --- User Stats ---
+
+export interface Stats {
+  sketches_count: number;
+  guessed_count: number;
+  attempts_count: number;
+  unguessed_count: number;
+}
+
 // --- Leaderboard ---
 
 export interface PlayerRanking {

@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import AppLayout from './layouts/AppLayout';
 import Landing from './pages/Landing';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 import Leaderboard from './pages/Leaderboard';
 import Draw from './pages/Draw';
 
@@ -16,6 +17,7 @@ function App() {
 
           {/* Pagine con AppLayout (sidebar, navbar, modali) */}
           <Route path="/home" element={<AppLayout><Home /></AppLayout>} />
+          <Route path="/profile" element={<AppLayout><Profile /></AppLayout>} />
           <Route path="/leaderboard" element={<AppLayout><Leaderboard /></AppLayout>} />
           <Route path="/draw" element={<AppLayout><Draw /></AppLayout>} />
         </Routes>
