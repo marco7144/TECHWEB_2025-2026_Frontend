@@ -2,11 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import * as sketchService from '../services/sketchService';
 import SketchPreview from './SketchPreview';
-
-interface AttemptObj {
-  guess: string;
-  is_correct: boolean;
-}
+import type { BackendAttempt } from '../types';
 
 interface GuessModalProps {
   sketchId: number | string;
@@ -24,7 +20,7 @@ export default function GuessModal({ sketchId, isReal, imageUrl, authorName, onC
   
   const [sketchPath, setSketchPath] = useState<string>('');
   const [author, setAuthor] = useState<string>(authorName || 'Autore Anonimo');
-  const [userAttempts, setUserAttempts] = useState<AttemptObj[]>([]);
+  const [userAttempts, setUserAttempts] = useState<BackendAttempt[]>([]);
   const [isCorrect, setIsCorrect] = useState(false);
   const [attemptsRemaining, setAttemptsRemaining] = useState(10);
   const [solution, setSolution] = useState<string | undefined>(undefined);
@@ -45,10 +41,10 @@ export default function GuessModal({ sketchId, isReal, imageUrl, authorName, onC
         setSketchPath(data.path || '');
         setAuthor(data.User?.username || 'Autore Anonimo');
         
-        const attempts = (data as any).user_attempts || [];
+        const attempts = data.user_attempts || [];
         setUserAttempts(attempts);
         
-        const hasCorrect = attempts.some((a: any) => a.is_correct);
+        const hasCorrect = attempts.some((a) => a.is_correct);
         setIsCorrect(hasCorrect);
         setAttemptsRemaining(10 - attempts.length);
 

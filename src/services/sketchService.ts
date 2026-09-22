@@ -1,5 +1,5 @@
 import { apiGet, apiPost } from './api';
-import type { BackendSketch, SketchDetail, AttemptResponse, WordsResponse } from '../types';
+import type { BackendSketch, SketchDetail, AttemptResponse, WordsResponse, CreateSketchRequest } from '../types';
 
 /**
  * Recupera la lista di tutti gli sketch dalla galleria.
@@ -18,12 +18,8 @@ export async function getSketch(id: number | string): Promise<SketchDetail> {
 /**
  * Crea un nuovo sketch (invia il disegno al backend).
  */
-export async function createSketch(data: {
-  id_word: number;
-  path: string;
-  words_token: string;
-}): Promise<unknown> {
-  return apiPost('/api/v1/sketches', data);
+export async function createSketch(data: CreateSketchRequest): Promise<BackendSketch> {
+  return apiPost<BackendSketch>('/api/v1/sketches', data);
 }
 
 /**

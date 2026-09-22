@@ -41,9 +41,13 @@ export default function Home() {
             >
               Best Sketchers
             </Link>
-            <button className="bg-surface text-on-background border-2 border-on-background rounded-lg px-4 py-2 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active whitespace-nowrap hover:bg-surface-variant transition-colors cursor-pointer">
+            <Link 
+              to="/leaderboard" 
+              state={{ tab: 'players' }}
+              className="bg-surface text-on-background border-2 border-on-background rounded-lg px-4 py-2 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active whitespace-nowrap hover:bg-surface-variant transition-colors cursor-pointer flex items-center justify-center"
+            >
               Most Guessed
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -117,21 +121,12 @@ export default function Home() {
                   </div>
                   <div className="text-[12px] opacity-80">{sketch.date}</div>
                 </div>
-                {sketch.author === selectedPreviewAuthor ? (
-                  <button 
-                    onClick={() => handleOpenPreviewModal(sketch.id, sketch.author)}
-                    className="bg-secondary-container text-on-secondary-fixed border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active text-[12px] cursor-pointer whitespace-nowrap"
-                  >
-                    Vedi Opera
-                  </button>
-                ) : (
-                  <button 
-                    onClick={() => handleOpenGuessModal(sketch.id, sketch.author)}
-                    className={`${sketch.btnBgClass} border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active text-[12px] cursor-pointer whitespace-nowrap`}
-                  >
-                    Guess Word!
-                  </button>
-                )}
+                <button 
+                  onClick={() => handleOpenGuessModal(sketch.id, sketch.author)}
+                  className={`${sketch.btnBgClass} border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active text-[12px] cursor-pointer whitespace-nowrap`}
+                >
+                  Guess Word!
+                </button>
               </div>
             </div>
           ))}

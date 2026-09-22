@@ -93,7 +93,7 @@ export function useGallery(): UseGalleryReturn {
   const displaySketches: DisplaySketch[] = sketches.map((s) => ({
     id: s.id_sketch,
     author: s.User?.username || 'Autore Anonimo',
-    date: new Date(s.createdAt).toLocaleDateString('it-IT', {
+    date: new Date(s.createdAt || s.timestamp || Date.now()).toLocaleDateString('it-IT', {
       day: 'numeric',
       month: 'short',
       year: 'numeric',
@@ -137,6 +137,7 @@ export function useGallery(): UseGalleryReturn {
   const handleCloseGuessModal = () => {
     setIsGuessModalOpen(false);
     setSelectedSketchId(null);
+    setSelectedSketchAuthor('');
     fetchSketches(); // Ricarica dopo aver chiuso il guess modal
   };
 
@@ -149,6 +150,7 @@ export function useGallery(): UseGalleryReturn {
   const handleClosePreviewModal = () => {
     setIsPreviewModalOpen(false);
     setSelectedPreviewSketchId(null);
+    setSelectedPreviewAuthor('');
   };
 
   return {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { validateUsername, validatePassword } from '../utils/validators';
@@ -37,6 +37,12 @@ export function useAuthForm({ mode, onSuccess, redirectOnSuccess = true }: UseAu
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Resetta errori e messaggi quando si cambia modalità (login <-> signup)
+  useEffect(() => {
+    setError(null);
+    setSuccess(null);
+  }, [mode]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,58 +1,38 @@
 // ============================================
 // Interfacce condivise per l'applicazione
+// I tipi delle API sono derivati automaticamente
+// dalla specifica OpenAPI generata dal backend.
 // ============================================
 
+import type { components, paths } from './api-schema';
+
+export type { paths };
+export type ApiSchemas = components['schemas'];
+
 // --- Auth ---
-
-export interface LoginResponse {
-  token: string;
-}
-
-export interface SignupResponse {
-  message?: string;
-}
+export type UserCredentials = components['schemas']['UserCredentials'];
+export type LoginResponse = components['schemas']['LoginResponse'];
+export type SignupResponse = components['schemas']['SignupResponse'];
+export type ErrorResponse = components['schemas']['ErrorResponse'];
 
 // --- Sketches ---
+export type CreateSketchRequest = components['schemas']['CreateSketchRequest'];
+export type CreateAttemptRequest = components['schemas']['CreateAttemptRequest'];
+export type BackendAttempt = components['schemas']['BackendAttempt'];
+export type BackendSketch = components['schemas']['BackendSketch'];
+export type SketchDetail = components['schemas']['SketchDetail'];
+export type AttemptResponse = components['schemas']['AttemptResponse'];
 
-export interface BackendAttempt {
-  guess: string;
-  is_correct: boolean;
-  timestamp?: string;
-}
+// --- Drawing / Words ---
+export type WordChoice = components['schemas']['WordChoice'];
+export type WordsResponse = components['schemas']['WordsResponse'];
 
-export interface BackendSketch {
-  id_sketch: number;
-  id_user: number;
-  path: string;
-  timestamp: string;
-  createdAt: string;
-  User: {
-    username: string;
-  };
-  user_attempts?: BackendAttempt[];
-}
+// --- User Stats & Leaderboards ---
+export type Stats = components['schemas']['UserStats'];
+export type PlayerRanking = components['schemas']['PlayerRanking'];
+export type ArtistRanking = components['schemas']['ArtistRanking'];
 
-export interface SketchDetail {
-  id_sketch: number;
-  path: string;
-  createdAt: string;
-  User: {
-    username: string;
-  };
-  Word?: {
-    text: string;
-  };
-  user_attempts?: BackendAttempt[];
-}
-
-export interface AttemptResponse {
-  is_correct: boolean;
-  attempts_remaining: number;
-  solution?: string;
-}
-
-// --- Drawing ---
-
+// --- Local Drawing / Canvas Types ---
 export interface PathObject {
   type: 'path';
   path: string;
@@ -69,40 +49,4 @@ export interface CanvasData {
   objects: PathObject[];
   width?: number;
   height?: number;
-}
-
-export interface WordChoice {
-  id_word: number;
-  text: string;
-}
-
-export interface WordsResponse {
-  words: WordChoice[];
-  token: string;
-}
-
-// --- User Stats ---
-
-export interface Stats {
-  sketches_count: number;
-  guessed_count: number;
-  attempts_count: number;
-  unguessed_count: number;
-}
-
-// --- Leaderboard ---
-
-export interface PlayerRanking {
-  id_user: number;
-  username: string;
-  score: number;
-}
-
-export interface ArtistRanking {
-  id_user: number;
-  username: string;
-  percentage: number;
-  total_attempts: number;
-  successful_attempts: number;
-  sketches_count: number;
 }
