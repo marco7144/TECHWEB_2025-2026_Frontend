@@ -27,3 +27,5 @@ dist-ssr
 .vercel
 .env
 .vite
+test-results/
+playwright-report/
