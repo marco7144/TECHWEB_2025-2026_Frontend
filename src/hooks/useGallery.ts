@@ -87,7 +87,7 @@ export function useGallery(): UseGalleryReturn {
 
   useEffect(() => {
     fetchSketches();
-  }, [fetchSketches]);
+  }, [fetchSketches, username]);
 
   // Trasforma i dati per le card
   const displaySketches: DisplaySketch[] = sketches.map((s) => ({

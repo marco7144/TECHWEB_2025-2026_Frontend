@@ -6,15 +6,13 @@ import type { BackendAttempt } from '../types';
 
 interface GuessModalProps {
   sketchId: number | string;
-  isReal: boolean;
-  imageUrl?: string;
   authorName?: string;
   onClose: () => void;
 }
 
-export default function GuessModal({ sketchId, isReal, imageUrl, authorName, onClose }: GuessModalProps) {
+export default function GuessModal({ sketchId, authorName, onClose }: GuessModalProps) {
   const { isGuest, username } = useAuth();
-  const [isLoading, setIsLoading] = useState(isReal);
+  const [isLoading, setIsLoading] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -29,13 +27,6 @@ export default function GuessModal({ sketchId, isReal, imageUrl, authorName, onC
   const [guessInput, setGuessInput] = useState('');
 
   useEffect(() => {
-    if (!isReal) {
-      // Mock Sketch Logic
-      setIsLoading(false);
-      return;
-    }
-
-    // Real Sketch Logic
     sketchService.getSketch(sketchId)
       .then((data) => {
         setSketchPath(data.path || '');
@@ -62,7 +53,7 @@ export default function GuessModal({ sketchId, isReal, imageUrl, authorName, onC
       .finally(() => {
         setIsLoading(false);
       });
-  }, [sketchId, isReal, username]);
+  }, [sketchId, username]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,17 +109,10 @@ export default function GuessModal({ sketchId, isReal, imageUrl, authorName, onC
             {/* Left Column: Sketch View */}
             <div className="flex-6 flex flex-col gap-4">
               <div className="border-4 border-on-background rounded-lg p-3 bg-white aspect-4/3 flex items-center justify-center overflow-hidden shadow-[8px_8px_0px_0px_#fcdf46] min-h-[280px]">
-                {isReal ? (
-                  sketchPath ? (
-                    <SketchPreview pathJson={sketchPath} animated={true} />
-                  ) : (
-                    <div className="text-sm font-semibold text-on-surface-variant">Nessun tracciato disponibile</div>
-                  )
+                {sketchPath ? (
+                  <SketchPreview pathJson={sketchPath} animated={true} />
                 ) : (
-                  <div 
-                    className="bg-cover bg-center w-full h-full" 
-                    style={{ backgroundImage: `url('${imageUrl}')` }}
-                  ></div>
+                  <div className="text-sm font-semibold text-on-surface-variant">Nessun tracciato disponibile</div>
                 )}
               </div>
               <div className="flex justify-between items-center px-1 bg-white border-2 border-on-background rounded p-2.5 shadow-[3px_3px_0px_0px_#1c1b1b]">
@@ -136,11 +120,6 @@ export default function GuessModal({ sketchId, isReal, imageUrl, authorName, onC
                   <span className="material-symbols-outlined text-primary text-lg font-bold">person</span>
                   Disegnato da: {author}
                 </span>
-                {!isReal && (
-                  <span className="bg-tertiary-fixed-dim text-on-secondary-fixed border-2 border-on-background px-2.5 py-0.5 rounded text-[10px] font-black uppercase shadow-[1px_1px_0px_0px_#1c1b1b]">
-                    Disegno Demo
-                  </span>
-                )}
               </div>
             </div>
 
@@ -229,7 +208,7 @@ export default function GuessModal({ sketchId, isReal, imageUrl, authorName, onC
               )}
 
               {/* Input Form */}
-              {isReal && !isGuest && !isAuthor && !isCorrect && attemptsRemaining > 0 && (
+              {!isGuest && !isAuthor && !isCorrect && attemptsRemaining > 0 && (
                 <form onSubmit={handleSubmit} className="flex gap-2 mt-auto">
                   <input 
                     type="text" 
@@ -249,11 +228,6 @@ export default function GuessModal({ sketchId, isReal, imageUrl, authorName, onC
                 </form>
               )}
 
-              {!isReal && !isGuest && (
-                <div className="bg-red-50 text-red-800 border-2 border-red-300 p-2.5 rounded font-semibold text-xs text-center">
-                  I disegni dimostrativi (mock) non supportano l'inserimento di risposte.
-                </div>
-              )}
             </div>
           </>
         )}

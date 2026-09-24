@@ -8,6 +8,7 @@ interface AuthModalProps {
 
 export default function AuthModal({ onClose, onSuccess }: AuthModalProps) {
   const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   
   const {
     username,
@@ -26,6 +27,7 @@ export default function AuthModal({ onClose, onSuccess }: AuthModalProps) {
 
   const toggleMode = () => {
     setIsLogin(!isLogin);
+    setShowPassword(false);
   };
 
   return (
@@ -73,14 +75,28 @@ export default function AuthModal({ onClose, onSuccess }: AuthModalProps) {
             disabled={isLoading}
             className="border-2 border-on-background p-3 rounded font-bold text-sm bg-background focus:outline-none focus:ring-0 focus:shadow-[2px_2px_0px_0px_#111111] transition-shadow disabled:opacity-50" 
           />
-          <input 
-            type="password" 
-            placeholder="Password" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            disabled={isLoading}
-            className="border-2 border-on-background p-3 rounded font-bold text-sm bg-background focus:outline-none focus:ring-0 focus:shadow-[2px_2px_0px_0px_#111111] transition-shadow disabled:opacity-50" 
-          />
+          <div className="relative flex items-center">
+            <input 
+              type={showPassword ? "text" : "password"} 
+              placeholder="Password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              disabled={isLoading}
+              className="w-full border-2 border-on-background p-3 pr-11 rounded font-bold text-sm bg-background focus:outline-none focus:ring-0 focus:shadow-[2px_2px_0px_0px_#111111] transition-shadow disabled:opacity-50" 
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              disabled={isLoading}
+              className="absolute right-3 flex items-center justify-center text-on-surface-variant hover:text-on-background active:scale-95 transition-all bg-transparent border-none p-0 cursor-pointer disabled:opacity-50"
+              title={showPassword ? "Nascondi password" : "Mostra password"}
+              aria-label={showPassword ? "Nascondi password" : "Mostra password"}
+            >
+              <span className="material-symbols-outlined text-[20px] select-none">
+                {showPassword ? "visibility_off" : "visibility"}
+              </span>
+            </button>
+          </div>
 
           <button 
             type="submit"

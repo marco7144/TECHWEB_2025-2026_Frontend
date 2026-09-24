@@ -1,6 +1,17 @@
 import { API_BASE_URL } from '../config';
 
 /**
+ * Funzione helper per parsare in modo sicuro la risposta JSON o restituire fallback pulito.
+ */
+async function parseResponseBody(response: Response) {
+  try {
+    return await response.json();
+  } catch {
+    return {};
+  }
+}
+
+/**
  * Helper per effettuare richieste GET autenticate al backend.
  * Aggiunge automaticamente gli headers e il token JWT se presente.
  */
@@ -15,8 +26,7 @@ export async function apiGet<T>(path: string): Promise<T> {
   }
 
   const response = await fetch(`${API_BASE_URL}${path}`, { headers });
-
-  const data = await response.json();
+  const data = await parseResponseBody(response);
 
   if (!response.ok) {
     if (response.status === 401) {
@@ -51,7 +61,7 @@ export async function apiPost<T>(path: string, body: unknown): Promise<T> {
     body: JSON.stringify(body),
   });
 
-  const data = await response.json();
+  const data = await parseResponseBody(response);
 
   if (!response.ok) {
     if (response.status === 401) {

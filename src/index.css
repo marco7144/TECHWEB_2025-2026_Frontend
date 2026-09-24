@@ -5,32 +5,21 @@
   --color-secondary-container: #fcdf46;
   --color-tertiary-container: #c2503d;
   
-  /* Opzioni di sfondo personalizzate */
-  --color-background: #fcf9f8; /* Originale */
+  /* Colori di sfondo e superficie dell'app */
+  --color-background: #fcf9f8;
   --color-surface: #fcf9f8;
-  
-  --color-background-1: #cbc1e3; /* Opzione 1: Lavanda */
-  --color-surface-1: #cbc1e3;
-  
-  --color-background-2: #fcf7eb; /* Opzione 2: Carta Calda */
-  --color-surface-2: #fcf7eb;
-  
-  --color-background-3: #fefcee; /* Opzione 3: Vaniglia */
-  --color-surface-3: #fefcee;
-
-  --color-background-4: #E9DDFF; /* Opzione 4: Viola Pastello */
-  --color-surface-4: #E9DDFF;
+  --color-background-2: #fcf7eb; /* Carta Calda (Galleria/Canvas) */
+  --color-background-4: #E9DDFF; /* Viola Pastello (Landing) */
   
   --color-surface-variant: #e5e2e1;
   --color-on-background: #1c1b1b;
   --color-on-surface-variant: #494454;
   --color-error: #ba1a1a;
   
-  /* Colori specifici della Galleria/Cards */
+  /* Colori specifici della Galleria e delle Card */
   --color-primary-fixed: #e9ddff;
   --color-tertiary-fixed-dim: #FC6F53;
   --color-on-primary-fixed: #23005c;
-  --color-on-primary-fixed-variant: #5516be;
   --color-on-secondary-container: #726200;
   --color-on-tertiary-container: #fffbff;
   --color-secondary-fixed: #ffe24c;

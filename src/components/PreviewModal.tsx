@@ -5,15 +5,13 @@ import SketchPreview from './SketchPreview';
 
 interface PreviewModalProps {
   sketchId: number | string;
-  isReal: boolean;
-  imageUrl?: string;
   authorName?: string;
   onClose: () => void;
 }
 
-export default function PreviewModal({ sketchId, isReal, imageUrl, authorName, onClose }: PreviewModalProps) {
+export default function PreviewModal({ sketchId, authorName, onClose }: PreviewModalProps) {
   const { isGuest, username } = useAuth();
-  const [isLoading, setIsLoading] = useState(isReal);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
   const [sketchPath, setSketchPath] = useState<string>('');
@@ -23,13 +21,6 @@ export default function PreviewModal({ sketchId, isReal, imageUrl, authorName, o
   const [isAuthor, setIsAuthor] = useState(false);
 
   useEffect(() => {
-    if (!isReal) {
-      // Mock Sketch Logic
-      setIsLoading(false);
-      return;
-    }
-
-    // Real Sketch Logic
     sketchService.getSketch(sketchId)
       .then((data) => {
         setSketchPath(data.path || '');
@@ -59,7 +50,7 @@ export default function PreviewModal({ sketchId, isReal, imageUrl, authorName, o
       .finally(() => {
         setIsLoading(false);
       });
-  }, [sketchId, isReal, username]);
+  }, [sketchId, username]);
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
@@ -84,17 +75,10 @@ export default function PreviewModal({ sketchId, isReal, imageUrl, authorName, o
             {/* Left Column: Sketch View */}
             <div className="flex-6 flex flex-col gap-4">
               <div className="border-4 border-on-background rounded-lg p-3 bg-white aspect-4/3 flex items-center justify-center overflow-hidden shadow-[8px_8px_0px_0px_#fcdf46] min-h-[280px]">
-                {isReal ? (
-                  sketchPath ? (
-                    <SketchPreview pathJson={sketchPath} animated={true} />
-                  ) : (
-                    <div className="text-sm font-semibold text-on-surface-variant">Nessun tracciato disponibile</div>
-                  )
+                {sketchPath ? (
+                  <SketchPreview pathJson={sketchPath} animated={true} />
                 ) : (
-                  <div 
-                    className="bg-cover bg-center w-full h-full" 
-                    style={{ backgroundImage: `url('${imageUrl}')` }}
-                  ></div>
+                  <div className="text-sm font-semibold text-on-surface-variant">Nessun tracciato disponibile</div>
                 )}
               </div>
             </div>
@@ -130,7 +114,7 @@ export default function PreviewModal({ sketchId, isReal, imageUrl, authorName, o
                 )}
 
                 {/* Secret Word Badge (If Solved or Author) */}
-                {isReal && (solution ? (
+                {solution ? (
                   <div className="bg-green-50 text-green-800 border-2 border-green-300 p-4 rounded font-black text-sm shadow-[3px_3px_0px_0px_rgba(22,163,74,0.15)]">
                     <span className="block text-xs uppercase font-black opacity-80 mb-0.5">Parola Segreta:</span>
                     <span className="text-lg tracking-wider uppercase">{solution}</span>
@@ -151,15 +135,6 @@ export default function PreviewModal({ sketchId, isReal, imageUrl, authorName, o
                         Non hai ancora risolto questo disegno. Clicca sul pulsante "Guess Word!" nella galleria per inserire le tue risposte.
                       </p>
                     )}
-                  </div>
-                ))}
-
-                {!isReal && (
-                  <div className="bg-secondary-container text-on-secondary-fixed border-2 border-on-background p-4 rounded font-black text-sm shadow-[3px_3px_0px_0px_rgba(28,27,27,0.15)]">
-                    <span className="block text-xs uppercase font-black opacity-80 mb-1">Disegno Demo</span>
-                    <p className="text-xs font-semibold text-on-surface-variant">
-                      Questo disegno è solo dimostrativo (mock) e non è associato a nessuna parola reale nel database.
-                    </p>
                   </div>
                 )}
               </div>

@@ -1,4 +1,5 @@
 import { useProfile } from '../hooks/useProfile';
+import raccoonAvatar from '../assets/raccoon.png';
 
 export default function Profile() {
   const { isGuest, username, stats, isLoading, error } = useProfile();
@@ -39,11 +40,11 @@ export default function Profile() {
           
           {/* User Info Card */}
           <div className="bg-white border-4 border-on-background rounded-xl p-6 shadow-[6px_6px_0px_0px_#111111] flex flex-col sm:flex-row items-center gap-6">
-            <div className="w-20 h-20 rounded-full border-4 border-on-background bg-primary-fixed flex items-center justify-center overflow-hidden shadow-[2px_2px_0px_0px_#111111]">
+            <div className="w-20 h-20 rounded-full border-4 border-on-background bg-white flex items-center justify-center overflow-hidden shadow-[2px_2px_0px_0px_#111111]">
               <img 
                 alt="Current Player Avatar" 
                 className="w-full h-full object-cover" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoDBFAVxBDKPgbfEqzZkHzMmeOziTM-LSfiTIYdVoPi6wFS7f1LBNvQHWHa3b0WInzxXzoIkKvwUdYB-CqWv6X5jK2xMCOFKGfhB_wU1cxO-P-DKqRGq4cdQQ5sCU8S_f4eaNtv8TevYwHDx0CZwepLvXN-Oa1MaU_baxJkoBywFSYkEP2HtxRqHQvlje6AGTAsuYMRyRfpz2ipF6mAmNJc4tPSBHiqIpU5K_ly_Yk4gT96GvloXZu3V6nuPj0uSKSMA6Dg-393SSj" 
+                src={raccoonAvatar} 
               />
             </div>
             <div className="text-center sm:text-left">

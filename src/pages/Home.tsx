@@ -78,18 +78,9 @@ export default function Home() {
 
       {/* Gallery Grid */}
       {isLoading ? (
-        <div className="col-span-full flex flex-col items-center justify-center py-12 gap-4 w-full">
+        <div className="col-span-full flex flex-col items-center justify-center py-20 gap-4 w-full">
           <span className="material-symbols-outlined text-primary text-5xl animate-bounce">brush</span>
           <p className="text-lg font-bold text-on-surface-variant animate-pulse">Caricamento capolavori in corso...</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full mt-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="border-4 border-on-background rounded-xl p-4 bg-white/40 h-[280px] flex flex-col gap-4 animate-pulse shadow-[4px_4px_0px_0px_#111111]">
-                <div className="w-full aspect-4/3 bg-background-2 border-2 border-on-background rounded-lg flex-1"></div>
-                <div className="h-4 bg-background-2 rounded w-2/3"></div>
-                <div className="h-6 bg-background-2 rounded w-1/3 self-end"></div>
-              </div>
-            ))}
-          </div>
         </div>
       ) : filteredSketches.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-12 px-4 border-4 border-dashed border-on-background/30 rounded-2xl bg-white/50 w-full text-center">
@@ -136,8 +127,6 @@ export default function Home() {
       {isGuessModalOpen && selectedSketchId !== null && (
         <GuessModal 
           sketchId={selectedSketchId}
-          isReal={true}
-          imageUrl=""
           authorName={selectedSketchAuthor}
           onClose={handleCloseGuessModal}
         />
@@ -146,8 +135,6 @@ export default function Home() {
       {isPreviewModalOpen && selectedPreviewSketchId !== null && (
         <PreviewModal 
           sketchId={selectedPreviewSketchId}
-          isReal={true}
-          imageUrl=""
           authorName={selectedPreviewAuthor}
           onClose={handleClosePreviewModal}
         />
