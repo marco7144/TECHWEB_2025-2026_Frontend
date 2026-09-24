@@ -318,7 +318,7 @@ export default function Draw() {
 
               {/* Canvas Undo/Redo/Clear actions */}
               <div className="flex flex-col gap-2">
-                <span className="text-xs font-black uppercase text-on-surface-variant">Azioni Canvas</span>
+                <span className="text-xs font-black uppercase text-on-surface-variant">Azioni Disegno</span>
                 <div className="flex gap-2 w-full">
                   <button
                     onClick={handleUndo}

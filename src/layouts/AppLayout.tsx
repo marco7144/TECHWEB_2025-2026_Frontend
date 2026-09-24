@@ -39,14 +39,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
           <Link to="/profile" className="bg-white/20 p-2 rounded-lg border-2 border-on-background hard-shadow flex items-center gap-2">
             <div className="w-10 h-10 rounded-full border-2 border-secondary-fixed bg-white flex items-center justify-center overflow-hidden">
               <img 
-                alt="Current Player Avatar" 
+                alt="Avatar utente" 
                 className="w-full h-full object-cover" 
                 src={raccoonAvatar} 
               />
             </div>
             <div>
               <div className="text-sm font-bold text-white">
-                {isGuest ? 'Guest' : username || 'Username'}
+                {isGuest ? 'Ospite' : username || 'Utente'}
               </div>
             </div>
           </Link>

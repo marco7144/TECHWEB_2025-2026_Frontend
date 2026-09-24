@@ -132,7 +132,7 @@ export default function PreviewModal({ sketchId, authorName, onClose }: PreviewM
                       </p>
                     ) : (
                       <p className="text-xs font-semibold text-on-surface-variant">
-                        Non hai ancora risolto questo disegno. Clicca sul pulsante "Guess Word!" nella galleria per inserire le tue risposte.
+                        Non hai ancora risolto questo disegno. Clicca sul pulsante "Indovina Parola!" nella galleria per inserire le tue risposte.
                       </p>
                     )}
                   </div>

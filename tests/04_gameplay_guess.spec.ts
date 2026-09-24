@@ -35,8 +35,8 @@ test.describe('04 - Gameplay (Tentativi di Indovinello & Anti-Spoiler)', () => {
     const sketchCard = page.locator('.sketch-card').first();
     await expect(sketchCard).toBeVisible();
 
-    // Cerca il bottone "Guess Word!"
-    const guessButton = page.locator('button:has-text("Guess Word!")').first();
+    // Cerca il bottone "Indovina Parola!"
+    const guessButton = page.locator('button:has-text("Indovina Parola!")').first();
     await expect(guessButton).toBeVisible();
     await guessButton.click();
 

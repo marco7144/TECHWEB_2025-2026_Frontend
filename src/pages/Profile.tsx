@@ -42,7 +42,7 @@ export default function Profile() {
           <div className="bg-white border-4 border-on-background rounded-xl p-6 shadow-[6px_6px_0px_0px_#111111] flex flex-col sm:flex-row items-center gap-6">
             <div className="w-20 h-20 rounded-full border-4 border-on-background bg-white flex items-center justify-center overflow-hidden shadow-[2px_2px_0px_0px_#111111]">
               <img 
-                alt="Current Player Avatar" 
+                alt="Avatar utente" 
                 className="w-full h-full object-cover" 
                 src={raccoonAvatar} 
               />

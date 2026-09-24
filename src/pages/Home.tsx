@@ -30,7 +30,7 @@ export default function Home() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
         <div>
           <h1 className="text-4xl md:text-5xl font-black text-on-background">Galleria</h1>
-          <p className="text-lg font-semibold text-on-surface-variant mt-1">Check out these masterpieces. Can you guess what they are?</p>
+          <p className="text-lg font-semibold text-on-surface-variant mt-1">Dai un'occhiata a questi capolavori. Riesci a indovinare cosa rappresentano?</p>
         </div>
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
           <div className="flex gap-2">
@@ -39,14 +39,14 @@ export default function Home() {
               state={{ tab: 'artists' }}
               className="bg-primary text-white border-2 border-on-background rounded-lg px-4 py-2 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active whitespace-nowrap cursor-pointer flex items-center justify-center"
             >
-              Best Sketchers
+              Top Disegnatori
             </Link>
             <Link 
               to="/leaderboard" 
               state={{ tab: 'players' }}
               className="bg-surface text-on-background border-2 border-on-background rounded-lg px-4 py-2 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active whitespace-nowrap hover:bg-surface-variant transition-colors cursor-pointer flex items-center justify-center"
             >
-              Most Guessed
+              Top Giocatori
             </Link>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function Home() {
                   onClick={() => handleOpenGuessModal(sketch.id, sketch.author)}
                   className={`${sketch.btnBgClass} border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active text-[12px] cursor-pointer whitespace-nowrap`}
                 >
-                  Guess Word!
+                  Indovina Parola!
                 </button>
               </div>
             </div>
