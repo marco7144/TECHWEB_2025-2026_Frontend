@@ -30,7 +30,7 @@ test.describe('03 - Area Disegno (Canvas & Anti-Cheat)', () => {
     await expect(page.locator(`text=${artistUser}`).first()).toBeVisible();
   });
 
-  test('Test 8: Selezione parole casuali offerte e caricamento Canvas con Timer', async ({ page }) => {
+  test('Test 6: Selezione parole casuali offerte e caricamento Canvas con Timer', async ({ page }) => {
     await page.goto('/draw');
 
     // Verifica titolo
@@ -59,7 +59,7 @@ test.describe('03 - Area Disegno (Canvas & Anti-Cheat)', () => {
     await expect(canvas).toBeVisible();
   });
 
-  test('Test 9: Interazione sul Canvas (tratti, undo) e Invio riuscito', async ({ page }) => {
+  test('Test 7: Interazione sul Canvas (tratti, undo) e Invio riuscito', async ({ page }) => {
     await page.goto('/draw');
 
     // Scegli una delle 3 parole offerte

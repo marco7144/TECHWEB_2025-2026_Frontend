@@ -30,7 +30,7 @@ test.describe('04 - Gameplay (Tentativi di Indovinello & Anti-Spoiler)', () => {
     await expect(page.locator(`text=${guesserUser}`).first()).toBeVisible();
   });
 
-  test('Test 10: Apertura modale indovinello, tentativo errato e decremento tentativi', async ({ page }) => {
+  test('Test 8: Apertura modale indovinello, tentativo errato e decremento tentativi', async ({ page }) => {
     // Attendi che i capolavori siano caricati nella griglia
     const sketchCard = page.locator('.sketch-card').first();
     await expect(sketchCard).toBeVisible();

@@ -32,7 +32,7 @@ test.describe('05 - Classifiche (Fix 0-score) & Statistiche Profilo', () => {
     await expect(page.locator(`text=${profileUser}`).first()).toBeVisible();
   });
 
-  test('Test 11: Caricamento Classifiche, verifica fix punteggi a 0 e cambio Tab', async ({ page }) => {
+  test('Test 9: Caricamento Classifiche, verifica fix punteggi a 0 e cambio Tab', async ({ page }) => {
     // Naviga a /leaderboard
     await page.getByRole('link', { name: /Classifiche/i }).first().click();
     await expect(page).toHaveURL(/\/leaderboard/);
@@ -52,7 +52,7 @@ test.describe('05 - Classifiche (Fix 0-score) & Statistiche Profilo', () => {
     await expect(page.locator('h2')).toContainText(/Migliori Disegnatori/i);
   });
 
-  test('Test 12: Profilo Utente e verifica dei 4 indicatori statistici della traccia', async ({ page }) => {
+  test('Test 10: Profilo Utente e verifica dei 4 indicatori statistici della traccia', async ({ page }) => {
     // Naviga a /profile
     await page.goto('/profile');
     await expect(page).toHaveURL(/\/profile/);
