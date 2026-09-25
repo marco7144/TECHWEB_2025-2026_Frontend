@@ -34,15 +34,15 @@ export default function Home() {
         </div>
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
           <div className="flex gap-2">
-            <Link 
-              to="/leaderboard" 
+            <Link
+              to="/leaderboard"
               state={{ tab: 'artists' }}
               className="bg-primary text-white border-2 border-on-background rounded-lg px-4 py-2 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active whitespace-nowrap cursor-pointer flex items-center justify-center"
             >
               Top Disegnatori
             </Link>
-            <Link 
-              to="/leaderboard" 
+            <Link
+              to="/leaderboard"
               state={{ tab: 'players' }}
               className="bg-surface text-on-background border-2 border-on-background rounded-lg px-4 py-2 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active whitespace-nowrap hover:bg-surface-variant transition-colors cursor-pointer flex items-center justify-center"
             >
@@ -91,11 +91,11 @@ export default function Home() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredSketches.map((sketch) => (
-            <div 
-              key={sketch.id} 
+            <div
+              key={sketch.id}
               className={`sketch-card ${sketch.bgClass} border-4 border-on-background rounded-xl p-4 flex flex-col gap-2 hard-shadow relative`}
             >
-              <div 
+              <div
                 onClick={() => handleOpenPreviewModal(sketch.id, sketch.author)}
                 className="w-full aspect-4/3 bg-white border-2 border-on-background rounded-lg overflow-hidden relative group cursor-pointer flex items-center justify-center"
               >
@@ -104,20 +104,23 @@ export default function Home() {
                   <span className="material-symbols-outlined text-white text-[48px] drop-shadow-md">zoom_in</span>
                 </div>
               </div>
-              <div className="flex justify-between items-end mt-1">
-                <div>
-                  <div className="text-sm font-bold text-on-surface flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[16px] text-primary">person</span>
-                    {sketch.author}
+              <div className="flex flex-col gap-2 mt-auto pt-1">
+                <div className="flex justify-between items-center text-xs">
+                  <div className="font-bold text-on-surface flex items-center gap-1 min-w-0">
+                    <span className="material-symbols-outlined text-[16px] text-primary shrink-0">person</span>
+                    <span className="truncate" title={sketch.author}>{sketch.author}</span>
                   </div>
-                  <div className="text-[12px] opacity-80">{sketch.date}</div>
+                  <span className="text-[11px] opacity-75 shrink-0 ml-2 whitespace-nowrap">{sketch.date}</span>
                 </div>
-                <button 
-                  onClick={() => handleOpenGuessModal(sketch.id, sketch.author)}
-                  className={`${sketch.btnBgClass} border-2 border-on-background rounded-lg px-2 py-1 text-sm font-bold hard-shadow hard-shadow-hover hard-shadow-active text-[12px] cursor-pointer whitespace-nowrap`}
-                >
-                  Indovina Parola!
-                </button>
+                <div className="flex justify-center mt-1">
+                  <button
+                    onClick={() => handleOpenGuessModal(sketch.id, sketch.author)}
+                    className={`${sketch.btnBgClass} border-2 border-on-background rounded-lg py-1 px-3.5 font-bold text-xs hard-shadow hard-shadow-hover hard-shadow-active cursor-pointer flex items-center gap-1.5`}
+                  >
+                    <span className="material-symbols-outlined text-[15px]">brush</span>
+                    Indovina Parola!
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -125,7 +128,7 @@ export default function Home() {
       )}
 
       {isGuessModalOpen && selectedSketchId !== null && (
-        <GuessModal 
+        <GuessModal
           sketchId={selectedSketchId}
           authorName={selectedSketchAuthor}
           onClose={handleCloseGuessModal}
@@ -133,7 +136,7 @@ export default function Home() {
       )}
 
       {isPreviewModalOpen && selectedPreviewSketchId !== null && (
-        <PreviewModal 
+        <PreviewModal
           sketchId={selectedPreviewSketchId}
           authorName={selectedPreviewAuthor}
           onClose={handleClosePreviewModal}

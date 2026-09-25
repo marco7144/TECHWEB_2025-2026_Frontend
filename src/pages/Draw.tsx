@@ -210,7 +210,7 @@ export default function Draw() {
             </div>
 
             {/* Canvas Block */}
-            <div className="relative border-4 border-on-background rounded-xl overflow-hidden bg-white shadow-[12px_12px_0px_0px_#1c1b1b] aspect-4/3 w-full flex items-center justify-center min-h-[300px]">
+            <div className="relative border-4 border-on-background rounded-xl overflow-hidden bg-white shadow-[8px_8px_0px_0px_#1c1b1b] md:shadow-[12px_12px_0px_0px_#1c1b1b] aspect-4/3 w-full flex items-center justify-center min-h-[220px] sm:min-h-[300px]">
               <canvas
                 ref={canvasRef}
                 width={600}
@@ -222,7 +222,7 @@ export default function Draw() {
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleMouseUpOrLeave}
-                className={`w-full h-full object-contain cursor-crosshair bg-white ${isTimeUp || submitLoading ? 'pointer-events-none opacity-90' : ''}`}
+                className={`w-full h-full object-contain cursor-crosshair bg-white touch-none ${isTimeUp || submitLoading ? 'pointer-events-none opacity-90' : ''}`}
               />
 
               {/* Time Up Overlays */}

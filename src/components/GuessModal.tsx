@@ -87,9 +87,9 @@ export default function GuessModal({ sketchId, authorName, onClose }: GuessModal
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
       {/* Modal Container */}
-      <div className="max-w-7xl w-full bg-background-2 bg-sketch-grid border-4 border-on-background p-6 md:p-8 rounded-xl shadow-[12px_12px_0px_0px_#1c1b1b] relative flex flex-col md:flex-row gap-6 my-8">
+      <div className="max-w-7xl w-full bg-background-2 bg-sketch-grid border-4 border-on-background p-4 sm:p-6 md:p-8 rounded-xl shadow-[8px_8px_0px_0px_#1c1b1b] md:shadow-[12px_12px_0px_0px_#1c1b1b] relative flex flex-col md:flex-row gap-4 md:gap-6 my-4 md:my-8">
         
         {/* Close Button */}
         <button 
@@ -108,7 +108,7 @@ export default function GuessModal({ sketchId, authorName, onClose }: GuessModal
           <>
             {/* Left Column: Sketch View */}
             <div className="flex-6 flex flex-col gap-4">
-              <div className="border-4 border-on-background rounded-lg p-3 bg-white aspect-4/3 flex items-center justify-center overflow-hidden shadow-[8px_8px_0px_0px_#fcdf46] min-h-[280px]">
+              <div className="border-4 border-on-background rounded-lg p-3 bg-white aspect-4/3 flex items-center justify-center overflow-hidden shadow-[8px_8px_0px_0px_#fcdf46] min-h-[200px] sm:min-h-[280px]">
                 {sketchPath ? (
                   <SketchPreview pathJson={sketchPath} animated={true} />
                 ) : (
@@ -181,7 +181,7 @@ export default function GuessModal({ sketchId, authorName, onClose }: GuessModal
               {!isAuthor && (
                 <div className="flex flex-col gap-2">
                   <span className="text-xs font-black uppercase text-on-surface-variant">Cronologia Tentativi</span>
-                  <div className="flex-1 overflow-y-auto min-h-[300px] max-h-[300px] border-2 border-on-background rounded p-2 bg-[#fcf7eb] flex flex-col gap-1.5">
+                  <div className="flex-1 overflow-y-auto min-h-[160px] max-h-[220px] sm:min-h-[260px] sm:max-h-[300px] border-2 border-on-background rounded p-2 bg-[#fcf7eb] flex flex-col gap-1.5">
                     {isGuest ? (
                       <p className="text-xs font-semibold text-on-surface-variant italic text-center my-auto px-4">
                         Registrati per vedere la tua cronologia e fare tentativi.
